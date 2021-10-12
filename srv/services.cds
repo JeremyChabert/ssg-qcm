@@ -7,7 +7,7 @@ service API {
     'READ',
     'CREATE',
     'WRITE'
-  ]}, ])                   as projection on model.Categorie;
+  ]}, ])                   as projection on model.Category;
 
   entity Exams @(restrict : [{
     grant : [
@@ -22,7 +22,7 @@ service API {
   entity QuestionsCategory as
     select from Questions {
           count(
-            category.ID
+            category.text
           ) as questioncategory : Integer,
       key category.text
     }

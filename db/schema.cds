@@ -5,8 +5,8 @@ using {
 
 namespace int.ssg;
 
-entity Categorie : cuid {
-      text : String;
+entity Category {
+      key text : String;
 }
 
 @assert.range
@@ -14,7 +14,7 @@ entity Question : cuid, managed {
       question      : String not null;
       answers       : Composition of many Answer
                             on answers.question = $self;
-      category      : Association to one Categorie;
+      category      : Association to one Category;
       possibilities : Integer default 1;
 }
 
