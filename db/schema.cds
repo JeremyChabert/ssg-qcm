@@ -9,7 +9,6 @@ entity Category {
       key text : String;
 }
 
-@assert.range
 entity Question : cuid, managed {
       question      : String not null;
       answers       : Composition of many Answer
