@@ -3,11 +3,7 @@ using int.ssg as model from '../db/schema';
 service API {
   entity Questions         as projection on model.Question;
   entity Answers           as projection on model.Answer;
-  entity Categories @(restrict : [{grant : [
-    'READ',
-    'CREATE',
-    'WRITE'
-  ]}, ])                   as projection on model.Category;
+  entity Categories        as projection on model.Category;
 
   entity Exams @(restrict : [{
     grant : [
