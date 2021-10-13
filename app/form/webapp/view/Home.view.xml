@@ -1,0 +1,128 @@
+<mvc:View
+    controllerName="int.ssg.form.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+>
+  <Shell id="shell">
+    <App id="app">
+      <pages>
+        <Page id="page" title="{i18n>title}" showFooter="true">
+          <content>
+            <VBox class="sapUiSmallMargin">
+              <f:SimpleForm id="SimpleFormChange480_12120Dual"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                title="Question and Answers Form"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false" >
+                <f:content>
+                  <core:Title text="Question" />
+                  <Label text="Text" design="Bold"/>
+                  <TextArea id="idQuestionText" value="{localQuestion>/data/question}" placeholder="Please input your question or copy paste it in here"
+                  rows="4" wrapping="Soft"/>
+                  <Label text="Category" design="Bold"  />
+                  <Select
+                            forceSelection="true"
+                            selectedKey="{localQuestion>/data/category_text}"
+                            items="{
+                              path: '/Categories',
+                              sorter: { path: 'text' }
+                            }">
+                            <core:Item key="{text}" text="{text}" />
+                          </Select>
+                </f:content>
+                <core:Title text="Answers" />
+                <Label text="Text" design="Bold"/>
+                <Input id="idAnswerText" type="Text" placeholder="Please input the answer or copy paste it in here"/>
+                <Label text="Correct" design="Bold"  />
+                <CheckBox id="idAnswerCorrect"/>
+                <Label text="Add" design="Bold" />
+                <Button text="Add answer" press="addAnswer"/>
+              </f:SimpleForm>
+              <Panel expandable="true" expanded="true" headerText="Recap">
+                <content>
+                <FlexBox direction="Column">
+                  <items>
+                  <!-- <core:Title text="Question recap" /> -->
+                  <FlexBox direction="Row">
+                    <Label text="Question text: " design="Bold" width="15rem"/>
+                    <Text text="{localQuestion>/data/question}" editable="false" enabled="false" class="sapUiSmallMarginBegin"/>
+                  </FlexBox>
+                  <FlexBox direction="Row">
+                    <Label text="Number of correct answers: " design="Bold" width="15rem"/>
+                    <Text text="{localQuestion>/data/nbCorrectAnswers}" editable="false" class="sapUiSmallMarginBegin"/>
+                  </FlexBox>
+                <!-- <core:Title text="Answers recap" /> -->
+                <t:Table
+                  id="idAnswersTable"
+                          rows="{localAnswer>/answers}"
+                          selectionMode="MultiToggle"
+                          visibleRowCount="7"
+                          paste="onPaste"
+                          ariaLabelledBy="title">
+                          <t:extension>
+                            <OverflowToolbar style="Clear">
+                              <Title id="title" text="Answers"/>
+                            </OverflowToolbar>
+                          </t:extension>
+                          <t:columns>
+                            <t:Column width="6rem" hAlign="End">
+                              <Label text="ID" />
+                              <t:template>
+                                <Label text="{localAnswer>ID}" />
+                              </t:template>
+                            </t:Column>
+                            <t:Column width="11rem">
+                              <Label text="Text" />
+                              <t:template>
+                                <Text text="{localAnswer>answer}" wrapping="false" />
+                              </t:template>
+                            </t:Column>
+                            <t:Column width="11rem">
+                              <Label text="Correct" />
+                              <t:template>
+                                <CheckBox selected="{localAnswer>correct}"/>
+                              </t:template>
+                            </t:Column>
+                            <t:Column width="11rem">
+                              <Label text="Delete" />
+                              <t:template>
+                                <Button press="onDeleteAnswer" icon="sap-icon://delete" type="Reject"/>
+                              </t:template>
+                            </t:Column>
+                          </t:columns>
+                        </t:Table>
+                        </items>
+                  </FlexBox>
+                </content>
+              </Panel>
+            </VBox>
+          </content>
+          <footer>
+            <OverflowToolbar>
+              <ToolbarSpacer/>
+              <Button text="Save" type="Accept" press="onSave" />
+              <Button text="Clear" type="Reject" press="clearForm"/>
+            </OverflowToolbar>
+          </footer>
+        </Page>
+      </pages>
+    </App>
+  </Shell>
+</mvc:View>
