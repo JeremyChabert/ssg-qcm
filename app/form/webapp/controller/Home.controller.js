@@ -30,13 +30,14 @@ sap.ui.define(
       //
       onSave() {
         const questionModel = this.getView().getModel('localQuestion');
-        const { question, nbCorrectAnswers: possibilities } = questionModel.getProperty('/data');
+        const { question, nbCorrectAnswers: possibilities, category_text } = questionModel.getProperty('/data');
         const questionBinding = this.getView().getModel().bindList('/Questions');
         const answersModel = this.getView().getModel('localAnswer');
         const answers = answersModel.getProperty('/answers') || [];
         const context = questionBinding.create({
           question,
           possibilities,
+          category_text,
           answers: answers.map(({ ID, ...answer }) => answer),
         });
         context.created().then(

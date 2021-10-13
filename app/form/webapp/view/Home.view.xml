@@ -37,13 +37,15 @@
                   <TextArea id="idQuestionText" value="{localQuestion>/data/question}" placeholder="Please input your question or copy paste it in here"
                   rows="4" wrapping="Soft"/>
                   <Label text="Category" design="Bold"  />
-                  <Select id="category">
-                    <items>
-                      <core:Item text="England" key="England"/>
-                      <core:Item text="Germany" key="Germany"/>
-                      <core:Item text="USA" key="USA"/>
-                    </items>
-                  </Select>
+                  <Select
+                            forceSelection="true"
+                            selectedKey="{localQuestion>/data/category_text}"
+                            items="{
+                              path: '/Categories',
+                              sorter: { path: 'text' }
+                            }">
+                            <core:Item key="{text}" text="{text}" />
+                          </Select>
                 </f:content>
                 <core:Title text="Answers" />
                 <Label text="Text" design="Bold"/>
@@ -62,7 +64,7 @@
                     <Label text="Question text: " design="Bold" width="15rem"/>
                     <Text text="{localQuestion>/data/question}" editable="false" enabled="false" class="sapUiSmallMarginBegin"/>
                   </FlexBox>
-                  <FlexBox direction="Row" class="sapUiSmallMarginBottom">
+                  <FlexBox direction="Row">
                     <Label text="Number of correct answers: " design="Bold" width="15rem"/>
                     <Text text="{localQuestion>/data/nbCorrectAnswers}" editable="false" class="sapUiSmallMarginBegin"/>
                   </FlexBox>
